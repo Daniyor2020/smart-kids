@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { XCircle } from "lucide-react";
 import Image from "next/image";
 
 // Predefined video list
@@ -175,7 +174,7 @@ console.log(currentVideos);
             onClick={resetVideo}
             className='absolute top-4 right-4 bg-red-600 p-2 rounded-full hover:bg-red-700 transition'
           >
-            <XCircle className='text-white' />
+           Close
           </button>
         </div>
       )}
