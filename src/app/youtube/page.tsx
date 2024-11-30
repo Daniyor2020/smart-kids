@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // Predefined video list
 
@@ -118,12 +119,12 @@ console.log(currentVideos);
     <div className='min-h-screen bg-gradient-to-b from-pink-300 via-purple-400 to-blue-500 text-white p-4 font-sans'>
     {/* Header */}
     <header className='flex justify-between items-center mb-8'>
-      <a
+      <Link
         href='/'
         className='text-lg font-bold text-white bg-yellow-500 px-4 py-2 rounded-full shadow-lg hover:bg-yellow-600 transition'
       >
         Back to Home
-      </a>
+      </Link>
       <h1 className='text-4xl font-extrabold text-yellow-300'>
         🎥 Kids &apos;s YouTube Zone
       </h1>

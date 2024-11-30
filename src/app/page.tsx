@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from 'next/link'
 
 export default function Home() {
   const handleUserChange = (name: string) => {
@@ -16,7 +17,7 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row gap-8">
           <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <a
+            <Link
               href="/youtube"
               target="_top"
               rel="noopener noreferrer"
@@ -31,11 +32,11 @@ export default function Home() {
                 className="rounded-full border-4 border-yellow-400"
               />
               <p className="text-lg font-semibold text-pink-600">Muslima</p>
-            </a>
+            </Link>
           </div>
 
           <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <a
+            <Link
               href="/youtube"
               target="_self"
               rel="noopener noreferrer"
@@ -50,11 +51,11 @@ export default function Home() {
                 className="rounded-full border-4 border-blue-400"
               />
               <p className="text-lg font-semibold text-green-600">Muhammad</p>
-            </a>
+            </Link>
           </div>
 
           <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <a
+            <Link
               href="/youtube"
               target="_parent"
               rel="noopener noreferrer"
@@ -69,7 +70,7 @@ export default function Home() {
                 className="rounded-full border-4 border-pink-400"
               />
               <p className="text-lg font-semibold text-purple-600">Sofia</p>
-            </a>
+            </Link>
           </div>
         </div>
       </main>
