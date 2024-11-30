@@ -82,7 +82,7 @@ const allVideos = {
 const YoutubePage = () => {
   const [videoId, setVideoId] = useState<string | null>(null);
 
-  const userName= sessionStorage.getItem("userName");
+  const userName = typeof window !== "undefined" ? sessionStorage.getItem("userName") : null;
 const currentVideos = React.useMemo(() => {
   if (userName === "Muhammad") {
     return allVideos.muhammad;
