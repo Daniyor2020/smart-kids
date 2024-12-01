@@ -7,25 +7,58 @@ import Link from "next/link";
 // Predefined video list
 
 const videos = [
-  {
-    id: 1,
-    title: "Video 1",
-    url: "https://www.youtube.com/watch?v=IpTZ1t7NJ9E",
-    thumbnail: "https://img.youtube.com/vi/IpTZ1t7NJ9E/0.jpg",
-  },
-  {
-    id: 2,
-    title: "Video 2",
-    url: "https://www.youtube.com/watch?v=_Cs9dXUZnsU",
-    thumbnail: "https://img.youtube.com/vi/_Cs9dXUZnsU/0.jpg",
-  },
-  {
-    id: 3,
-    title: "Video 3",
-    url: "https://www.youtube.com/watch?v=RYJ0uEEiS7w",
-    thumbnail: "https://img.youtube.com/vi/RYJ0uEEiS7w/0.jpg",
-  },
-];
+    {
+      id: 1,
+      title: "Video 1",
+      url: "https://www.youtube.com/watch?v=IpTZ1t7NJ9E",
+      thumbnail: "https://img.youtube.com/vi/IpTZ1t7NJ9E/0.jpg",
+    },
+    {
+      id: 2,
+      title: "Video 2",
+      url: "https://www.youtube.com/watch?v=_Cs9dXUZnsU",
+      thumbnail: "https://img.youtube.com/vi/_Cs9dXUZnsU/0.jpg",
+    },
+    {
+      id: 3,
+      title: "Video 3",
+      url: "https://www.youtube.com/watch?v=xJ5w5WQBhO0",
+      thumbnail: "https://img.youtube.com/vi/xJ5w5WQBhO0/0.jpg",
+    },
+    {
+      id: 4,
+      title: "Video 4",
+      url: "https://www.youtube.com/watch?v=pw17M-fQMXo",
+      thumbnail: "https://img.youtube.com/vi/pw17M-fQMXo/0.jpg",
+    },
+    {
+      id: 5,
+      title:
+        "Multiplication - Level 10 | Learn to Count - 123 | Maths Cartoons for Kids | @Numberblocks",
+      url: "https://www.youtube.com/watch?v=ejE-7bWz1Ho",
+      thumbnail: "https://img.youtube.com/vi/ejE-7bWz1Ho/0.jpg",
+    },
+    {
+      id: 6,
+      title: "Minecraft's ",
+      url: "https://www.youtube.com/watch?v=GxLClggK-hQ",
+      thumbnail: "https://img.youtube.com/vi/GxLClggK-hQ/0.jpg",
+    },
+   
+    {
+      id: 7,
+      title: "I Found Minecraft's RAREST Mobs in 24 Hours!",
+      url: "https://www.youtube.com/watch?v=0UFYOvp2Ke0",
+      thumbnail: "https://img.youtube.com/vi/0UFYOvp2Ke0/0.jpg",
+    },
+    {
+      id: 8,
+      title: "The Story Of Prophet Ibrahim (AS) | Animated Full Movie",
+      url: "https://www.youtube.com/watch?v=wuNAlw5kmW8",
+      thumbnail: "https://img.youtube.com/vi/wuNAlw5kmW8/0.jpg",
+    }
+
+  ];
 
 const muslimVideos = [
   {
@@ -92,7 +125,6 @@ const currentVideos = React.useMemo(() => {
     return allVideos.muslima;
   }
 }, [userName]);
-console.log(currentVideos);
 
   // Extract video ID
   const extractYouTubeVideoId = (url: string): string | null => {
