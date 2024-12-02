@@ -88,13 +88,13 @@ const muslimVideos = [
   {
     id: 5,
     title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
-    url: "https://www.youtube.com/watch?v=Hmjhcsq-qMQ&list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk&index=4",
-    thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+    url: "https://www.youtube.com/watch?v=-Ct8qZdrr-s",
+    thumbnail: "https://img.youtube.com/vi/-Ct8qZdrr-s/0.jpg",
   },
   {
     id: 6,
-    title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
-    url: "https://www.youtube.com/watch?v=VG3arGjg0Hk",
+    title: "Scared of Maths? | Why Do People Get So Anxious About Math? | Fear of Mathematics | Dr Binocs Shows",
+    url: "https://www.youtube.com/watch?v=U0Pq7xcqWnM&t=10s",
     thumbnail: "https://img.youtube.com/vi/VG3arGjg0Hk/0.jpg",
 
   },
@@ -102,7 +102,13 @@ const muslimVideos = [
     id: 7,
     title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
     url: "https://www.youtube.com/watch?v=U0Pq7xcqWnM",
-    thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+    thumbnail: "https://img.youtube.com/vi/U0Pq7xcqWnM/0.jpg",
+  },
+  {
+    id: 8,
+    title: "The Story of Martin Luther King Jr. | In Memory of Greatest Civil Rights Leader | Dr. Binocs Show",
+    url: "https://www.youtube.com/watch?v=snYrHgoGJ5A",
+    thumbnail: "https://img.youtube.com/vi/snYrHgoGJ5A/0.jpg",
   }
 ];
 const sofia = [
