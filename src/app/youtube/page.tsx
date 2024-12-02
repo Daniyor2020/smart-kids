@@ -85,6 +85,25 @@ const muslimVideos = [
     url: "https://www.youtube.com/watch?v=YGshLFIGn0U&list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk&index=3",
     thumbnail: "https://img.youtube.com/vi/YGshLFIGn0U/0.jpg",
   },
+  {
+    id: 5,
+    title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
+    url: "https://www.youtube.com/watch?v=Hmjhcsq-qMQ&list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk&index=4",
+    thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+  },
+  {
+    id: 6,
+    title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
+    url: "https://www.youtube.com/watch?v=VG3arGjg0Hk",
+    thumbnail: "https://img.youtube.com/vi/VG3arGjg0Hk/0.jpg",
+
+  },
+  {
+    id: 7,
+    title: "Yajooj Majooj | Dhul Qarnayn | Islamic stories for kids | Stories from Quran and Hadith",
+    url: "https://www.youtube.com/watch?v=U0Pq7xcqWnM",
+    thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+  }
 ];
 const sofia = [
     {
