@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 // Predefined video list
+
+const video_link  ='https://blog-dob1.onrender.com//linksByUserId/1'
 
 const videos = [
     {
@@ -171,6 +173,20 @@ const currentVideos = React.useMemo(() => {
   const resetVideo = () => {
     setVideoId(null);
   };
+
+  useEffect(() => {
+ const getVideos = async () => {
+   try {
+     const response = await fetch(video_link);
+     const data = await response.json();
+     console.log('videos from api',data);
+   } catch (error) {
+     console.error('Error fetching data:', error);
+   }
+ }
+
+ getVideos();
+  }, []);
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-pink-300 via-purple-400 to-blue-500 text-white p-4 font-sans'>
