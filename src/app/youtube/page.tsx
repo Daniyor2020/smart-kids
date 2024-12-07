@@ -58,6 +58,12 @@ const videos = [
       title: "The Story Of Prophet Ibrahim (AS) | Animated Full Movie",
       url: "https://www.youtube.com/watch?v=wuNAlw5kmW8",
       thumbnail: "https://img.youtube.com/vi/wuNAlw5kmW8/0.jpg",
+    },
+    {
+      id: 9,
+      title: "Season 3 All Episode - Minecraft Animation",
+      url: "https://www.youtube.com/watch?v=X09yxFuKLAs",
+      thumbnail: "https://img.youtube.com/vi/X09yxFuKLAs/0.jpg",
     }
 
   ];
