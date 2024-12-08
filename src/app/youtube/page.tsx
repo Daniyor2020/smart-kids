@@ -8,6 +8,13 @@ import Link from "next/link";
 
 const video_link  ='https://blog-dob1.onrender.com//linksByUserId/1'
 
+interface Video {
+  id: number;
+  title: string;
+  url: string;
+  thumbnail: string;
+}
+
 const videos = [
    
 
@@ -241,8 +248,11 @@ const currentVideos = React.useMemo(() => {
 
 export default YoutubePage;
 
-
-const SelectVideo = ({videos,handleVideoSelect}:any) => {
+interface SelectVideoProps {
+  videos:  Video[] | undefined;
+  handleVideoSelect: (video: string) => void;
+}
+const SelectVideo = ({videos,handleVideoSelect}:SelectVideoProps) => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
 
