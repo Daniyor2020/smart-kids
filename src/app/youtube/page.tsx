@@ -11,15 +11,15 @@ const video_link  ='https://blog-dob1.onrender.com//linksByUserId/1'
 const videos = [
     {
       id: 1,
-      title: "Video 1",
-      url: "https://www.youtube.com/watch?v=IpTZ1t7NJ9E",
-      thumbnail: "https://img.youtube.com/vi/IpTZ1t7NJ9E/0.jpg",
+      title: "THE CREAKING - Villager vs Pillager vs Creaking Army of the Pale Garden (Minecraft Movie Animation)",
+      url: "https://www.youtube.com/watch?v=geMncXjwJoY",
+      thumbnail: "https://img.youtube.com/vi/geMncXjwJoY/0.jpg",
     },
     {
       id: 2,
-      title: "Video 2",
-      url: "https://www.youtube.com/watch?v=_Cs9dXUZnsU",
-      thumbnail: "https://img.youtube.com/vi/_Cs9dXUZnsU/0.jpg",
+      title: "Warden Origin | FULL MOVIE | MINECRAFT ANIMATION",
+      url: "https://www.youtube.com/watch?v=OVUBtJVU-Ic",
+      thumbnail: "https://img.youtube.com/vi/OVUBtJVU-Ic/0.jpg",
     },
     {
       id: 3,
@@ -71,9 +71,9 @@ const videos = [
 const muslimVideos = [
   {
     id: 1,
-    title: "Video 1",
-    url: "https://www.youtube.com/watch?v=NulUsNMldgw",
-    thumbnail: "https://img.youtube.com/vi/NulUsNMldgw/0.jpg",
+    title: "1 Hour Compilation (Bismillah, Alhamdulillah, Etc) | Omar & Hana English",
+    url: "https://www.youtube.com/watch?v=wW5NwX_Ex5E",
+    thumbnail: "https://img.youtube.com/vi/wW5NwX_Ex5E/0.jpg",
   },
   {
     id: 2,
@@ -117,6 +117,12 @@ const muslimVideos = [
     title: "The Story of Martin Luther King Jr. | In Memory of Greatest Civil Rights Leader | Dr. Binocs Show",
     url: "https://www.youtube.com/watch?v=snYrHgoGJ5A",
     thumbnail: "https://img.youtube.com/vi/snYrHgoGJ5A/0.jpg",
+  },
+  {
+    id: 9,
+    title: "The Story of Martin Luther King Jr. | In Memory of Greatest Civil Rights Leader | Dr. Binocs Show",
+    url: "https://www.youtube.com/watch?v=do1lP632bY8&list=PLGQ5yMe4AdXoGmMG8n9l-ybgPMooQKaAd&index=2",
+    thumbnail: "https://img.youtube.com/vi/do1lP632bY8/0.jpg",
   }
 ];
 const sofia = [
@@ -139,6 +145,40 @@ const sofia = [
         thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
    
       },
+      {
+        id: 4,
+        title: "I'm The Best Muslim - Season 1 - World's Best Islamic Education Series",
+        url: "https://www.youtube.com/watch?v=lGind6Cn0Tw",
+        thumbnail: "https://img.youtube.com/vi/lGind6Cn0Tw/0.jpg",
+   
+      },
+      {
+        id: 5,
+        title: "LETS LEARN WITH LAITH & LAYLA - COMPILATION",
+        url: "https://www.youtube.com/watch?v=gKcwP9udO_E",
+        thumbnail: "https://img.youtube.com/vi/gKcwP9udO_E/0.jpg",
+   
+      },
+      {
+        id: 6,
+        title: "Video 6",
+        url: "https://www.youtube.com/watch?v=Hmjhcsq-qMQ",
+        thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+   
+      },
+      {
+        id: 7,
+        title: "Video 7",
+        url: "https://www.youtube.com/watch?v=Hmjhcsq-qMQ",
+        thumbnail: "https://img.youtube.com/vi/Hmjhcsq-qMQ/0.jpg",
+      },
+      {
+        id: 8,
+        title: "The Makers of Omar & Hana - Islamic Stories Mina Mila - We Are Twins - Muslim Siblings | Durioo",
+        url: "https://www.youtube.com/watch?v=9kVFakzzXe8",
+        thumbnail: "https://img.youtube.com/vi/9kVFakzzXe8/0.jpg",
+      },
+
 ]
 const allVideos = {
     muslima : muslimVideos,
@@ -248,6 +288,7 @@ const currentVideos = React.useMemo(() => {
               width={"100%"}
               title='Embedded YouTube Video'
               onError={resetVideo}
+              
             />
           </div>
           <button
