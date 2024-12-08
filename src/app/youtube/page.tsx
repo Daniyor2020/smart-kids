@@ -6,10 +6,10 @@ import Link from "next/link";
 
 // Predefined video list
 
-const video_link  ='https://blog-dob1.onrender.com//linksByUserId/1'
+const video_link  ='https://blog-dob1.onrender.com/linksByUserId/1'
 
 interface Video {
-  id: number;
+  user_id: number;
   title: string;
   url: string;
   thumbnail: string;
@@ -149,6 +149,8 @@ const allVideos = {
 }
 const YoutubePage = () => {
   const [videoId, setVideoId] = useState<string | null>(null);
+  const [videos, setVideos] = useState<Video[]>([]);
+  
 
   const userName = typeof window !== "undefined" ? sessionStorage.getItem("userName") : null;
 const currentVideos = React.useMemo(() => {
@@ -188,6 +190,7 @@ const currentVideos = React.useMemo(() => {
      const response = await fetch(video_link);
      const data = await response.json();
      console.log('videos from api',data);
+     setVideos(data.links);
    } catch (error) {
      console.error('Error fetching data:', error);
    }
@@ -217,7 +220,7 @@ const currentVideos = React.useMemo(() => {
         <p className='text-center mb-6 text-lg font-medium'>
           👩‍👩‍👧‍👦 Welcome {userName || "Guest"}! Select a video to play:
         </p>
-        <SelectVideo videos={currentVideos} handleVideoSelect={handleVideoSelect}/>
+        <SelectVideo videos={videos} handleVideoSelect={handleVideoSelect}/>
       </div>
     ) : (
         <div className='fixed inset-0 z-50 bg-black flex items-center justify-center'>
@@ -253,32 +256,34 @@ interface SelectVideoProps {
   handleVideoSelect: (video: string) => void;
 }
 const SelectVideo = ({videos,handleVideoSelect}:SelectVideoProps) => {
+  console.log('videos',videos);
+  if(videos?.length === 0) {
+    return (
+      <p className='text-center' key={'video'}>No videos found.</p>
+    )
+  }
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
 
     
-    {videos?.map((video:unknown) =>{ 
-        if(videos.length === 0) {
-          return (
-            <p className='text-center' key={'video'}>No videos found.</p>
-          )
-        }
-      if (typeof video === "string") {
+    {videos?.map((video:Video) =>{ 
+      
+      if (typeof video.title === "string") {
         return (
           <div
-            key={video}
+            key={video.user_id}
             className='cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition'
-            onClick={() => handleVideoSelect(video)}
+            onClick={() => handleVideoSelect(video.url)}
           >
             <Image
-              src={video}
-              alt={video}
+              src={video?.thumbnail}
+              alt={video?.title}
               className='w-full h-48 object-cover rounded-t-xl'
               width={200}
               height={300}
             />
             <div className='p-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-center'>
-              <p className='text-black font-semibold'>{video}</p>
+              <p className='text-black font-semibold'>{video.title}</p>
             </div>
           </div>
         );
