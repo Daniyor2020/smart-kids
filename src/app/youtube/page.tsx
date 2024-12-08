@@ -181,9 +181,9 @@ const sofia = [
 
 ]
 const allVideos = {
-    muslima : muslimVideos,
-    muhammad : videos,
-    sofia: sofia 
+    muslima : [],
+    muhammad : [],
+    sofia: [] 
 }
 const YoutubePage = () => {
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -255,26 +255,7 @@ const currentVideos = React.useMemo(() => {
         <p className='text-center mb-6 text-lg font-medium'>
           👩‍👩‍👧‍👦 Welcome {userName || "Guest"}! Select a video to play:
         </p>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-          {currentVideos?.map((video) => (
-            <div
-              key={video.id}
-              className='cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition'
-              onClick={() => handleVideoSelect(video.url)}
-            >
-              <Image
-                src={video.thumbnail}
-                alt={video.title}
-                className='w-full h-48 object-cover rounded-t-xl'
-                width={200}
-                height={300}
-              />
-              <div className='p-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-center'>
-                <p className='text-black font-semibold'>{video.title}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <SelectVideo videos={currentVideos} handleVideoSelect={handleVideoSelect}/>
       </div>
     ) : (
         <div className='fixed inset-0 z-50 bg-black flex items-center justify-center'>
@@ -304,3 +285,40 @@ const currentVideos = React.useMemo(() => {
 };
 
 export default YoutubePage;
+
+
+const SelectVideo = ({videos,handleVideoSelect}:any) => {
+  return (
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+
+    
+    {videos?.map((video:unknown) =>{ 
+        if(videos.length === 0) {
+          return (
+            <p className='text-center' key={'video'}>No videos found.</p>
+          )
+        }
+      if (typeof video === "string") {
+        return (
+          <div
+            key={video}
+            className='cursor-pointer bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transform hover:scale-105 transition'
+            onClick={() => handleVideoSelect(video)}
+          >
+            <Image
+              src={video}
+              alt={video}
+              className='w-full h-48 object-cover rounded-t-xl'
+              width={200}
+              height={300}
+            />
+            <div className='p-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-center'>
+              <p className='text-black font-semibold'>{video}</p>
+            </div>
+          </div>
+        );
+      }
+    })}
+    </div>
+  )
+}
