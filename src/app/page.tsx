@@ -2,11 +2,42 @@
 
 import Image from "next/image";
 import Link from 'next/link'
-
+import { useEffect, useState } from "react";
+import { User } from "./addLinks/types";
+const imageSrc = {Muslima:"/Mus.jpg", Muhammad:"/Muhammad.jpg", Sofia:"/sof.jpg"};
 export default function Home() {
+  const [users, setUsers] = useState<User[]>([]);
+
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const handleUserChange = (name: string) => {
     sessionStorage.setItem("userName", name);
   };
+ useEffect(() => {
+  const fetchUsers = async () => {
+    // setState(prev => ({ ...prev, loading: true }));
+    if (!baseUrl) {
+      console.error('process.env.baseUrl is not defined');
+      return;
+    }
+    try {
+      const response = await fetch(baseUrl + '/users');
+      const data = await response.json();
+      setUsers(data);
+    } catch (err) {
+      // setState(prev => ({
+      //   ...prev,
+      //   error: 'Error fetching users. Please try again later.',
+      // }));
+      console.error('Error fetching users:', err);
+    } finally {
+      // setState(prev => ({ ...prev, loading: false }));
+    }
+  };
+    fetchUsers();
+  }, [baseUrl]);
+
+  
+
 
   return (
     <div className="flex flex-col items-center justify-space-between h-screen min-w-screen bg-gradient-to-b from-pink-300 via-purple-400 to-blue-500 text-white p-4 font-sans flex flex-col " >
@@ -16,62 +47,33 @@ export default function Home() {
         </h1>
 
         <div className="flex flex-col sm:flex-row gap-8">
-          <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <Link
-              href="/youtube"
-              target="_top"
-              rel="noopener noreferrer"
-              onClick={() => handleUserChange("Muslima")}
-              className="flex flex-col items-center justify-center gap-4"
-            >
-              <Image
-                src="/Mus.jpg"
-                alt="Muslima"
-                width={200}
-                height={200}
-                className="rounded-full border-4 border-yellow-400"
-              />
-              <p className="text-lg font-semibold text-pink-600">Muslima</p>
-            </Link>
-          </div>
+          {users.map((user, index) => {
+      
+            const borderColor = ["border-yellow-400", "border-blue-400", "border-pink-400"][index];
+            const textColor = ["text-pink-600", "text-green-600", "text-purple-600"][index];
+            const target = ["_top", "_self", "_parent"][index];
 
-          <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <Link
-              href="/youtube"
-              target="_self"
-              rel="noopener noreferrer"
-              onClick={() => handleUserChange("Muhammad")}
-              className="flex flex-col items-center justify-center gap-4"
-            >
-              <Image
-                src="/Muhammad.jpg"
-                alt="Muhammad"
-                width={200}
-                height={200}
-                className="rounded-full border-4 border-blue-400"
-              />
-              <p className="text-lg font-semibold text-green-600">Muhammad</p>
-            </Link>
-          </div>
-
-          <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
-            <Link
-              href="/youtube"
-              target="_parent"
-              rel="noopener noreferrer"
-              onClick={() => handleUserChange("Sofia")}
-              className="flex flex-col items-center justify-center gap-4"
-            >
-              <Image
-                src="/sof.jpg"
-                alt="Sofia"
-                width={200}
-                height={200}
-                className="rounded-full border-4 border-pink-400"
-              />
-              <p className="text-lg font-semibold text-purple-600">Sofia</p>
-            </Link>
-          </div>
+            return (
+              <div key={user.id} className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition-all">
+                <Link
+                  href="/youtube"
+                  target={target}
+                  rel="noopener noreferrer"
+                  onClick={() => handleUserChange(user.username)}
+                  className="flex flex-col items-center justify-center gap-4"
+                >
+                  <Image
+                    src={imageSrc[user.username as keyof typeof imageSrc]}
+                    alt={user.username}
+                    width={50}
+                    height={50}
+                    className={`rounded-full border-4 ${borderColor}`}
+                  />
+                  <p className={`text-lg font-semibold ${textColor}`}>{user.username}</p>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </main>
 
@@ -81,3 +83,4 @@ export default function Home() {
     </div>
   );
 }
+

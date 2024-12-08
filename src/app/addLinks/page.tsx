@@ -1,76 +1,150 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 
-interface Video {
-  url: string;
-  thumbnail: string;
-  user_id: string;
-  title: string;
-}
-const creat_video_link  ='https://blog-dob1.onrender.com/links'
+import { YouTubeLinkForm } from './YouTubeLinkForm';
 
-const AddLinks = () => {
-  const [link, setLink] = useState('');
+import type { User, Video, YouTubeLinkFormState } from './types';
+import { extractYouTubeVideoId, fetchVideoTitle } from './utils';
+import { useToast } from '../hooks/use-toast';
 
-  const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(event.target.value);
-  };
 
-  const handleAddLink = async () => {
-    const videoId = extractYouTubeVideoId(link);
-    if (videoId) {
-      const payload: Video = {
-        url: link,
-        thumbnail: `https://img.youtube.com/vi/${videoId}/0.jpg`,
-        user_id: '1',
-        title : 'test',
-      };
-      console.log('Added video:', payload);
+const initialState: YouTubeLinkFormState = {
+  link: '',
+  title: null,
+  selectedUser: null,
+  error: null,
+  loading: false,
+};
 
-      await fetch(creat_video_link, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Video added successfully:', data);
-          setLink('');
-        })
-        .catch((error) => {
-          console.error('Error adding video:', error);
-        });
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+ const AddLinks: React.FC = () => {
+  const [state, setState] = useState<YouTubeLinkFormState>(initialState);
+  const [users, setUsers] = useState<User[]>([]);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    setState(prev => ({ ...prev, loading: true }));
+    try {
+      const response = await fetch(baseUrl + '/users');
+      const data = await response.json();
+      setUsers(data);
+    } catch (err) {
+      setState(prev => ({
+        ...prev,
+        error: 'Error fetching users. Please try again later.',
+      }));
+      console.error('Error fetching users:', err);
+    } finally {
+      setState(prev => ({ ...prev, loading: false }));
     }
   };
 
-  function extractYouTubeVideoId(url: string): string | null {
-    const match = url.match(
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-    );
-    return match ? match[1] : null;
-  }
+  const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState(prev => ({
+      ...prev,
+      link: event.target.value,
+      error: null,
+    }));
+  };
+
+  const handleLinkBlur = async () => {
+    const videoId = extractYouTubeVideoId(state.link);
+    if (!videoId) {
+      setState(prev => ({
+        ...prev,
+        error: 'Please enter a valid YouTube URL',
+      }));
+      return;
+    }
+
+    setState(prev => ({ ...prev, loading: true }));
+    try {
+      const title = await fetchVideoTitle(videoId);
+      setState(prev => ({ ...prev, title, error: null }));
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (err ) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to fetch video title. Please check the URL.',
+      }));
+    } finally {
+      setState(prev => ({ ...prev, loading: false }));
+    }
+  };
+
+  const handleUserChange = (value: string) => {
+    setState(prev => ({
+      ...prev,
+      selectedUser: value,
+      error: null,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    if (!state.link || !state.selectedUser || !state.title) {
+      setState(prev => ({
+        ...prev,
+        error: 'Please fill in all required fields.',
+      }));
+      return;
+    }
+
+    const videoId = extractYouTubeVideoId(state.link);
+    if (!videoId) return;
+
+    setState(prev => ({ ...prev, loading: true }));
+
+    const payload: Video = {
+      url: state.link,
+      thumbnail: `https://img.youtube.com/vi/${videoId}/0.jpg`,
+      user_id: state.selectedUser,
+      title: state.title,
+    };
+
+    try {
+      const response = await fetch(baseUrl + '/links', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error('Failed to add video');
+
+      toast({
+        title: "Success!",
+        description: "Video has been added successfully.",
+      });
+
+      setState(initialState);
+    } catch (err) {
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to add video. Please try again.',
+      }));
+      console.error('Error adding video:', err);
+    } finally {
+      setState(prev => ({ ...prev, loading: false }));
+    }
+  };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Add YouTube Link</h2>
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Enter YouTube link"
-            value={link}
-            onChange={handleLinkChange}
-            className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring focus:border-blue-500"
-          />
-        </div>
-        <button
-          onClick={handleAddLink}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full"
-        >
-          Add
-        </button>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-4xl mx-auto">
+        <YouTubeLinkForm
+          link={state.link}
+          title={state.title}
+          onLinkChange={handleLinkChange}
+          onLinkBlur={handleLinkBlur}
+          onUserChange={handleUserChange}
+          onSubmit={handleSubmit}
+          users={users}
+          loading={state.loading}
+          error={state.error}
+        />
       </div>
     </div>
   );
