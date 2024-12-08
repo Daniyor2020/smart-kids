@@ -112,7 +112,7 @@ const YoutubePage = () => {
             onClick={resetVideo}
             className='absolute top-4 right-4 bg-red-600 p-2 rounded-full hover:bg-red-700 transition'
           >
-            Close
+            Go Back
           </button>
         </div>
       )}
