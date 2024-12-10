@@ -2,8 +2,8 @@
 import Link from 'next/link'
 import React from 'react'
 
-const WatchYoutubeVideo = async({ params }: { params: { videoId: string } }) => {
-const resolvedParams = await params
+const WatchYoutubeVideo = async({ params }: { params: Promise<{ videoId: string }>; }) => {
+const resolvedParams = await (params)
 const videoId = resolvedParams.videoId
 
     return (

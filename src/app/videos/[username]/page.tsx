@@ -13,8 +13,8 @@ interface Video {
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const video_link = `${baseUrl}/vidoes/`;
-export default async function SelectVideo({ params }: { params: { username: string } }) {
-  const resolvedParams = await params
+export default async function SelectVideo({ params }: { params: Promise<{ username: string } >;}) {
+  const resolvedParams = await (params)
   const { username } = resolvedParams;
   try {
 
