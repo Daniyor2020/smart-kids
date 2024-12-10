@@ -48,7 +48,7 @@ export  async function SelectVideo ({ userId, handleVideoSelect }: SelectVideoPr
     );
   } catch (error) {
     console.error(error);
-    return <div>Error fetching videos: {error.message.toString()}</div>;
+    return <div>Error fetching videos</div>;
   }
 };
   
