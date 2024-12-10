@@ -2,8 +2,10 @@
 import Link from 'next/link'
 import React from 'react'
 
-const WatchYoutubeVideo = ({ params }: { params: { videoId: string } }) => {
-    const videoId = params.videoId
+const WatchYoutubeVideo = async({ params }: { params: { videoId: string } }) => {
+const resolvedParams = await params
+const videoId = resolvedParams.videoId
+
     return (
         <div className='min-h-screen bg-gradient-to-b from-pink-300 via-purple-400 to-blue-500 text-white p-4 font-sans'>
           {/* Header */}
@@ -40,4 +42,5 @@ const WatchYoutubeVideo = ({ params }: { params: { videoId: string } }) => {
         </div>
       )
     }
+
 export default WatchYoutubeVideo
